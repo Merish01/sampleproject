@@ -1,5 +1,4 @@
-num = int(input())
-if num%2 == 0 :
-    print("Even")
-else:
-    print("Odd")
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("StudentData.csv")
