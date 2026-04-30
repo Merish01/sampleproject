@@ -1,31 +1,38 @@
-import pandas as pd
-import numpy as np
+import matplotlib.pyplot as plt
 
-df = pd.read_csv("StudentData.csv")
-df = df.drop_duplicates()
-print("\nDuplicates removed")
-print("\nData Types:\n", df.dtypes)
-df.columns = df.columns.str.strip().str.lower()
-Q1 = df.quantile(0.25)
-Q3 = df.quantile(0.75)
-IQR = Q3 - Q1
+x = [1,2,3,4,5]
+y = [10,20,15,25,30]
 
-df_clean = df[~((df < (Q1 - 1.5 * IQR)) | (df > (Q3 + 1.5 * IQR))).any(axis=1)]
+plt.plot(x,y)
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Simple Line Plot')
+plt.show()
 
-print("\nOutliers removed (if any)")
+plt.plot(x,y,color = 'red',marker = '*', linestyle = ':')
+plt.title("Style line Graph")
+plt.show()
 
-print("\nCleaned Data:\n", df_clean.head())
+Students = ['A','B','C','D','E']
+Marks = [85,90,78,92,88]
+plt.bar(Students, Marks, color = 'green')
+plt.xlabel('Students')
+plt.ylabel('Marks')
+plt.title('Bar Graph')
+plt.show()
 
-df_clean.to_csv("cleaned_student_data.csv", index=False)
+labels = ["Python", "Java", "C++"]
+sizes = [50, 30, 20]
+plt.pie(sizes, labels=labels, autopct='%1.1f%%')
+plt.title("Programming Language Usage")
+plt.show()
 
-print("\nCorrelation:\n", df_clean.corr())
+plt.subplot(1,2,1)
+plt.plot(x, y)
+plt.title("Line")
 
-df_clean["hours_group"] = pd.cut(df_clean["hours"], bins=3)
+plt.subplot(1,2,2)
+plt.bar(Students, Marks)
+plt.title("Bar")
 
-grouped = df_clean.groupby("hours_group")["scores"].mean()
-
-print("\nAverage Scores by Study Hours Group:\n", grouped)
-
-df_clean.to_csv("cleaned_student_data.csv", index=False)
-
-df.groupby("hours")
+plt.show()
