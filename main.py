@@ -1,38 +1,38 @@
+import pandas as pd
 import matplotlib.pyplot as plt
 
-x = [1,2,3,4,5]
-y = [10,20,15,25,30]
+df = pd.read_csv("StudentData.csv")
 
-plt.plot(x,y)
-plt.xlabel('X-axis')
-plt.ylabel('Y-axis')
-plt.title('Simple Line Plot')
+plt.scatter(df['Hours'],df['Scores'],marker = 'o',linestyle = '--')
+plt.xlabel('Hours')
+plt.ylabel('Scores')
+plt.title('Student Scores vs Hours Studied')
 plt.show()
 
-plt.plot(x,y,color = 'red',marker = '*', linestyle = ':')
-plt.title("Style line Graph")
-plt.show()
-
-Students = ['A','B','C','D','E']
-Marks = [85,90,78,92,88]
-plt.bar(Students, Marks, color = 'green')
-plt.xlabel('Students')
-plt.ylabel('Marks')
+plt.bar(df['Hours'],df['Scores'], color = 'green')
+plt.xlabel('Hours')
+plt.ylabel('Scores')
 plt.title('Bar Graph')
 plt.show()
 
-labels = ["Python", "Java", "C++"]
-sizes = [50, 30, 20]
+labels = df['Hours'].head(5)
+sizes = df['Scores'].head(5)
 plt.pie(sizes, labels=labels, autopct='%1.1f%%')
-plt.title("Programming Language Usage")
+plt.title("Top 5 Scores")
 plt.show()
+plt.hist(df['Scores'],bins =10 )
 
-plt.subplot(1,2,1)
-plt.plot(x, y)
-plt.title("Line")
+plt.title("Distribution of Scores")
+plt.show()
+plt.figure(figsize=(10,5))
 
-plt.subplot(1,2,2)
-plt.bar(Students, Marks)
-plt.title("Bar")
+plt.subplot(1,2,1)   
+plt.scatter(df['Hours'], df['Scores'])
+plt.title("Scatter Plot")
 
+plt.subplot(1,2,2)  
+plt.hist(df['Scores'])
+plt.title("Histogram")
+
+plt.tight_layout()
 plt.show()
