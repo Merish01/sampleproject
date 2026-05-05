@@ -1,38 +1,22 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+from data_loader import load_data
+from data_processing import process_data
+from visualization import (
+    plot_scatter,
+    plot_histogram,
+    plot_bar,
+    plot_pie,
+    plot_subplot
+)
 
-df = pd.read_csv("StudentData.csv")
+df = load_data("StudentData.csv")
 
-plt.scatter(df['Hours'],df['Scores'],marker = 'o',linestyle = '--')
-plt.xlabel('Hours')
-plt.ylabel('Scores')
-plt.title('Student Scores vs Hours Studied')
-plt.show()
+if df is not None:
+    
+    df, grouped = process_data(df)
 
-plt.bar(df['Hours'],df['Scores'], color = 'green')
-plt.xlabel('Hours')
-plt.ylabel('Scores')
-plt.title('Bar Graph')
-plt.show()
-
-labels = df['Hours'].head(5)
-sizes = df['Scores'].head(5)
-plt.pie(sizes, labels=labels, autopct='%1.1f%%')
-plt.title("Top 5 Scores")
-plt.show()
-plt.hist(df['Scores'],bins =10 )
-
-plt.title("Distribution of Scores")
-plt.show()
-plt.figure(figsize=(10,5))
-
-plt.subplot(1,2,1)   
-plt.scatter(df['Hours'], df['Scores'])
-plt.title("Scatter Plot")
-
-plt.subplot(1,2,2)  
-plt.hist(df['Scores'])
-plt.title("Histogram")
-
-plt.tight_layout()
-plt.show()
+    # Step 3: Visualize
+    plot_scatter(df)
+    plot_histogram(df)
+    plot_bar(grouped)
+    plot_pie(df)
+    plot_subplot(df)
